@@ -12,6 +12,7 @@ async function registerUser(firstName, lastName, email, password, passwordConfir
       password,
       passwordConfirmation,
     });
+    
 
     console.log('User registered successfully:', response.data);
     return response.data;
@@ -22,9 +23,9 @@ async function registerUser(firstName, lastName, email, password, passwordConfir
 }
 
 // Function to verify a user
-async function verifyUser(userId) {
+async function verifyUser(userId, verificationCode) {
   try {
-    const response = await axios.post(`${baseUrl}/api/users/verify/:id/:verificationCode`, { userId });
+    const response = await axios.post(`${baseUrl}/api/users/verify/${userId}/${verificationCode}`, {});
 
     console.log('User verified successfully:', response.data);
     return response.data;
@@ -34,8 +35,9 @@ async function verifyUser(userId) {
   }
 }
 
+
 // Function to log in
-async function login(email, password) {
+async function loginUser(email, password) {
   try {
     const response = await axios.post(`${baseUrl}/api/sessions`, { email, password });
 

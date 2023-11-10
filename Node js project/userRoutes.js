@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Adjust the path based on your project structure
+const User = require('../models/User'); // Adjust 
 
 // Handle user registration
 router.post('/api/users', (req, res) => {
@@ -13,6 +13,6 @@ router.post('/api/users', (req, res) => {
     .catch(error => res.status(400).json({ error: error.message }));
 });
 
-// Handle other user-related routes as needed
+
 
 module.exports = router;

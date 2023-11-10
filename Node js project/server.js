@@ -1,8 +1,7 @@
 
 const http = require('http');
 const mongoose = require('mongoose');
-const User = require('./models/User'); // Import the User model
-
+const User = require('./models/User'); // Import 
 const hostname = '127.0.0.1';
 const port = 3000;
 
