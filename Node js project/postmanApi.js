@@ -35,7 +35,7 @@ async function verifyUser(userId) {
 }
 
 // Function to log in
-async function loginUser(email, password) {
+async function login(email, password) {
   try {
     const response = await axios.post(`${baseUrl}/api/sessions`, { email, password });
 
