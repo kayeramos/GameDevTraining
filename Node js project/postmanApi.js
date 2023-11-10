@@ -23,7 +23,7 @@ async function registerUser(firstName, lastName, email, password, passwordConfir
 }
 
 // Function to verify a user
-async function verifyUse(userId, verificationCode) {
+async function verifyUser(userId, verificationCode) {
   try {
     const response = await axios.post(`${baseUrl}/api/users/verify/${userId}/${verificationCode}`, {});
 
