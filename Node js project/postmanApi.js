@@ -2,46 +2,44 @@ const axios = require('axios');
 
 const baseUrl = 'http://localhost:3000'; 
 
-// Function to register a user
-async function registerUser(firstName, lastName, email, password, passwordConfirmation) {
+// Function to register an Employee
+async function registerEmployee(firstName, lastName, email, password, passwordConfirmation) {
   try {
-    const response = await axios.post(`${baseUrl}/api/users`, {
+    const response = await axios.post(`${baseUrl}/api/employees`, {
       firstName,
       lastName,
       email,
       password,
       passwordConfirmation,
     });
-    
 
-    console.log('User registered successfully:', response.data);
+    console.log('Employee registered successfully:', response.data);
     return response.data;
   } catch (error) {
-    console.error('Error registering user:', error.response ? error.response.data : error.message);
+    console.error('Error registering Employee:', error.response ? error.response.data : error.message);
     throw error;
   }
 }
 
-// Function to verify a user
-async function verifyUser(userId, verificationCode) {
+// Function to verify an Employee
+async function verifyEmployee(employeeId, verificationCode) {
   try {
-    const response = await axios.post(`${baseUrl}/api/users/verify/${userId}/${verificationCode}`, {});
+    const response = await axios.post(`${baseUrl}/api/employees/verify/${employeeId}/${verificationCode}`, {});
 
-    console.log('User verified successfully:', response.data);
+    console.log('Employee verified successfully:', response.data);
     return response.data;
   } catch (error) {
-    console.error('Error verifying user:', error.response ? error.response.data : error.message);
+    console.error('Error verifying Employee:', error.response ? error.response.data : error.message);
     throw error;
   }
 }
-
 
 // Function to log in
-async function loginUser(email, password) {
+async function loginEmployee(email, password) {
   try {
     const response = await axios.post(`${baseUrl}/api/sessions`, { email, password });
 
-    console.log('User logged in successfully:', response.data);
+    console.log('Employee logged in successfully:', response.data);
     return response.data;
   } catch (error) {
     console.error('Error logging in:', error.response ? error.response.data : error.message);
@@ -49,16 +47,15 @@ async function loginUser(email, password) {
   }
 }
 
-// Function to get current user
-async function getCurrentUser() {
+// Function to get the current Employee
+async function getCurrentEmployee() {
   try {
     const response = await axios.get(`${baseUrl}/api/me`);
 
-    console.log('Current user:', response.data);
+    console.log('Current Employee:', response.data);
     return response.data;
   } catch (error) {
-    console.error('Error getting current user:', error.response ? error.response.data : error.message);
+    console.error('Error getting current Employee:', error.response ? error.response.data : error.message);
     throw error;
   }
 }
-
