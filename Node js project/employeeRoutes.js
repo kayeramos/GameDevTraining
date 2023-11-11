@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Employee = require('../models/employee'); 
+const Employee = require('../models/employee'); // Adjust the path to match your actual project structure
 
 // Handle Employee registration
 router.post('/api/employees', (req, res) => {
