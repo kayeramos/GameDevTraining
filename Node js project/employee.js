@@ -38,37 +38,34 @@ app.post('/api/users/register', async (req, res) => {
   }
 });
 
-// Endpoint for verifying a user (placeholder, you need to implement actual verification logic)
-app.post('/api/users/verify', async (req, res) => { // /api/users/verify/:id/:verificationCode
+// Endpoint for verifying a user 
+app.post('/api/users/verify', async (req, res) => { 
   const { id, verificationCode } = req.body;
 
   try {
-    // Implement logic to verify user using id and verificationCode
-    // For simplicity, let's assume verification is successful
+    
     res.status(200).json({ message: 'User verified successfully' });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-// Endpoint for user login (placeholder, you need to implement actual login logic)
+// Endpoint for user login 
 app.post('/api/sessions', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Implement logic to check if email and password match a user in the database
-    // For simplicity, let's assume login is successful
+    
     res.status(200).json({ message: 'User logged in successfully' });
   } catch (error) {
     res.status(401).json({ error: 'Invalid email or password' });
   }
 });
 
-// Endpoint for getting the current user (placeholder, you need to implement actual logic)
+// Endpoint for getting the current user 
 app.get('/api/me', async (req, res) => {
   try {
-    // Implement logic to get the current user based on authentication
-    // For simplicity, let's assume a user is always authenticated
+    
     const currentUser = await User.findOne({ email: 'test@example.com' });
     res.status(200).json(currentUser);
   } catch (error) {

@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const baseUrl = 'http://localhost:3000';
 
-// Function to register a user
+// Register a user
 async function registerUser(firstName, lastName, email, password) {
   try {
     const response = await axios.post(`${baseUrl}/api/users/register`, {
@@ -20,7 +20,7 @@ async function registerUser(firstName, lastName, email, password) {
   }
 }
 
-// Function to verify a user
+// Verify a user
 async function verifyUser(id, verificationCode) {
   try {
     const response = await axios.post(`${baseUrl}/api/users/verify`, {
@@ -36,7 +36,7 @@ async function verifyUser(id, verificationCode) {
   }
 }
 
-// Function to log in
+// Log in
 async function loginUser(email, password) {
   try {
     const response = await axios.post(`${baseUrl}/api/sessions`, {
@@ -52,7 +52,7 @@ async function loginUser(email, password) {
   }
 }
 
-// Function to get the current user
+// Get current user
 async function getCurrentUser() {
   try {
     const response = await axios.get(`${baseUrl}/api/me`);
