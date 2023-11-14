@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   password: String,
+  verificationCode: String, 
 });
 
 // Model based on the schema
@@ -30,20 +31,36 @@ app.post('/api/users/register', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   try {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
+
     const newUser = new User({ firstName, lastName, email, password });
     const savedUser = await newUser.save();
+    
+    // Send back the saved user data as a response (optional)
     res.status(201).json(savedUser);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
+
 // Endpoint for verifying a user 
 app.post('/api/users/verify', async (req, res) => { 
   const { id, verificationCode } = req.body;
 
   try {
+    // Find the user by ID and verification code
+    const user = await User.findOne({ _id: id, verificationCode });
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid verification code' });
+    }
+
     
+
     res.status(200).json({ message: 'User verified successfully' });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -55,7 +72,14 @@ app.post('/api/sessions', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    
+    const user = await User.findOne({ email, password });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid email or password' });
+    }
+
+   
+
     res.status(200).json({ message: 'User logged in successfully' });
   } catch (error) {
     res.status(401).json({ error: 'Invalid email or password' });
@@ -64,9 +88,16 @@ app.post('/api/sessions', async (req, res) => {
 
 // Endpoint for getting the current user 
 app.get('/api/me', async (req, res) => {
+  const { email } = req.query;
+
   try {
-    
-    const currentUser = await User.findOne({ email: 'test@example.com' });
+    const currentUser = await User.findOne({ email });
+
+    if (!currentUser) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+
+    // Return the current user's details
     res.status(200).json(currentUser);
   } catch (error) {
     res.status(401).json({ error: 'Unauthorized' });
